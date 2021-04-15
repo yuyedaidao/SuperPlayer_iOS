@@ -7,8 +7,19 @@
 @class SuperPlayerControlView;
 @class SuperPlayerView;
 @class TXImageSprite;
+
+/// 播放器的状态
+typedef NS_ENUM(NSInteger, SuperPlayerState) {
+    StateFailed,     // 播放失败
+    StateBuffering,  // 缓冲中
+    StatePlaying,    // 播放中
+    StateStopped,    // 停止播放
+    StatePause,      // 暂停播放
+};
+
 @protocol SuperPlayerDelegate <NSObject>
 @optional
+- (void)superPlayer:(SuperPlayerView *)player stateDidChange:(SuperPlayerState)state;
 /// 返回事件
 - (void)superPlayerBackAction:(SuperPlayerView *)player;
 /// 全屏改变通知
@@ -21,15 +32,6 @@
 - (void)superPlayerError:(SuperPlayerView *)player errCode:(int)code errMessage:(NSString *)why;
 // 需要通知到父view的事件在此添加
 @end
-
-/// 播放器的状态
-typedef NS_ENUM(NSInteger, SuperPlayerState) {
-    StateFailed,     // 播放失败
-    StateBuffering,  // 缓冲中
-    StatePlaying,    // 播放中
-    StateStopped,    // 停止播放
-    StatePause,      // 暂停播放
-};
 
 
 /// 播放器布局样式

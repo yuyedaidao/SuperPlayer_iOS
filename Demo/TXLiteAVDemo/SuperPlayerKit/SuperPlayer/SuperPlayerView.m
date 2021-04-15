@@ -1200,6 +1200,9 @@ static UISlider * _volumeSlider;
     } else if (state == StatePause) {
 
     }
+    if ([self.delegate respondsToSelector:@selector(superPlayer:stateDidChange:)]) {
+        [self.delegate superPlayer:self stateDidChange:state];
+    }
 }
 
 - (void)setControlView:(SuperPlayerControlView *)controlView {
